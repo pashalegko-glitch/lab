@@ -8,6 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
 (function(){
@@ -1997,6 +1998,7 @@ const RATIOS={orig:{l:"Оригинал"},"4:5":{l:"4:5 · лента",w:1080,h:
 const persist=()=>{try{localStorage.setItem("lab-state",JSON.stringify({ratio}))}catch(e){}};
 try{const s=JSON.parse(localStorage.getItem("lab-state")||"null");if(s&&RATIOS[s.ratio])ratio=s.ratio}catch(e){}
 $("size").value=ratio;
+if(window.Telegram&&Telegram.WebApp){try{Telegram.WebApp.ready();Telegram.WebApp.expand()}catch(e){}}
 
 const photos=[]; let cur=-1, uid=0, gen=0, queue=[], running=null, downloads=null;
 const worker=new Worker(URL.createObjectURL(new Blob([$("worker-src").textContent],{type:"text/javascript"})));
