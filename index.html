@@ -14,6 +14,7 @@
 (function(){
   function err(code){var e=new Error(code);e.code=code;return e}
   async function share(files){
+    if(!/iPhone|iPad|iPod|Android/.test(navigator.userAgent))return false;
     if(navigator.canShare&&navigator.canShare({files:files})){
       try{await navigator.share({files:files})}catch(e){throw err(e&&e.name==="AbortError"?"declined":"unavailable")}
       return true}
